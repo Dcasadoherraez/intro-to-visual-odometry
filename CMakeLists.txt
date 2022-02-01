@@ -78,6 +78,10 @@ include_directories(${INCLUDE_DIRS})
 add_executable(main
     src/main.cc
     src/frame.cc
+    src/camera.cc
+    src/frontend.cc
+    src/map.cc
+    src/mappoint.cc
 )
 
 target_link_libraries(main 

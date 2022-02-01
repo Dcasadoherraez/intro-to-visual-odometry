@@ -3,9 +3,7 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include <stdlib.h>
-#include <opencv4/opencv2/core.hpp>
-#include <opencv4/opencv2/features2d.hpp>
+#include "common_include.h"
 
 using namespace std;
 using namespace cv;
@@ -13,6 +11,8 @@ using namespace cv;
 
 class Frame {
 public:
+    typedef shared_ptr<Frame> Ptr;
+
     int _id;
     Mat _img_left;
     Mat _img_right;
@@ -23,6 +23,8 @@ public:
     Mat _descriptors_left;
     vector<KeyPoint> _features_right;
     Mat _descriptors_right;
+
+    Frame() {}
 
     Frame(int id, Mat img_left, Mat img_right, double timestamp);
 
@@ -37,6 +39,8 @@ public:
 
     // display matches between frames
     void DisplayMatches();
+
+
 };
 
 #endif

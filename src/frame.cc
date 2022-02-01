@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include <opencv4/opencv2/core.hpp>
-#include <opencv4/opencv2/features2d.hpp>
-#include "opencv4/opencv2/highgui.hpp"
-
+#include "common_include.h"
 #include "frame.h"
 
 using namespace std;
@@ -14,8 +10,8 @@ void Frame::GetFeatures() {
 
     vector<KeyPoint> keypoints_left, keypoints_right;
     Mat descriptors_left, descriptors_right;
-    Ptr<FeatureDetector> detector = ORB::create();
-    Ptr<DescriptorExtractor> descriptor = ORB::create();
+    cv::Ptr<FeatureDetector> detector = ORB::create();
+    cv::Ptr<DescriptorExtractor> descriptor = ORB::create();
 
     // compute the descriptors in both images
     detector->detect(_img_left, keypoints_left);
@@ -35,20 +31,20 @@ void Frame::GetFeatures() {
 
 vector<DMatch> Frame::MatchFeatures() {
     vector<DMatch> matches;
-    Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("BruteForce-Hamming");
+    cv::Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create("BruteForce-Hamming");
 
     matcher->match(_descriptors_left, _descriptors_right, matches);
 
     auto min_max = minmax_element(matches.begin(), matches.end(),
                                 [](const DMatch &m1, const DMatch &m2) { return m1.distance < m2.distance; });
     double min_dist = min_max.first->distance;
-    double max_dist = min_max.second->distance;
   
     vector<DMatch> good_matches;
     for (int i = 0; i < _descriptors_left.rows; i++) {
         if (matches[i].distance <= max(2 * min_dist, 30.0)) 
             good_matches.push_back(matches[i]);
     }
+    cout << "All matches: " << to_string(matches.size()) << " Good matches: " << to_string(good_matches.size()) << endl;
 
     return good_matches;
 }
@@ -57,11 +53,8 @@ void Frame::DisplayMatches() {
     vector<DMatch> matches = Frame::MatchFeatures();
     
     Mat img_match;
-    Mat img_goodmatch;
     drawMatches(_img_left, _features_left, _img_right, _features_right, matches, img_match);
-    drawMatches(_img_left, _features_left, _img_right, _features_right, matches, img_goodmatch);
     imshow("all matches", img_match);
-    imshow("good matches", img_goodmatch);
     waitKey(0);
 
 }

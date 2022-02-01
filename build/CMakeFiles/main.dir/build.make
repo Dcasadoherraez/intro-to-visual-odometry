@@ -83,16 +83,76 @@ CMakeFiles/main.dir/src/frame.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/frame.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /ssd1_lin/Thesis/intro-to-visual-odometry/src/frame.cc -o CMakeFiles/main.dir/src/frame.cc.s
 
+CMakeFiles/main.dir/src/camera.cc.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/camera.cc.o: ../src/camera.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/src/camera.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/camera.cc.o -c /ssd1_lin/Thesis/intro-to-visual-odometry/src/camera.cc
+
+CMakeFiles/main.dir/src/camera.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/camera.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /ssd1_lin/Thesis/intro-to-visual-odometry/src/camera.cc > CMakeFiles/main.dir/src/camera.cc.i
+
+CMakeFiles/main.dir/src/camera.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/camera.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /ssd1_lin/Thesis/intro-to-visual-odometry/src/camera.cc -o CMakeFiles/main.dir/src/camera.cc.s
+
+CMakeFiles/main.dir/src/frontend.cc.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/frontend.cc.o: ../src/frontend.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/src/frontend.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/frontend.cc.o -c /ssd1_lin/Thesis/intro-to-visual-odometry/src/frontend.cc
+
+CMakeFiles/main.dir/src/frontend.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/frontend.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /ssd1_lin/Thesis/intro-to-visual-odometry/src/frontend.cc > CMakeFiles/main.dir/src/frontend.cc.i
+
+CMakeFiles/main.dir/src/frontend.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/frontend.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /ssd1_lin/Thesis/intro-to-visual-odometry/src/frontend.cc -o CMakeFiles/main.dir/src/frontend.cc.s
+
+CMakeFiles/main.dir/src/map.cc.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/map.cc.o: ../src/map.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/src/map.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/map.cc.o -c /ssd1_lin/Thesis/intro-to-visual-odometry/src/map.cc
+
+CMakeFiles/main.dir/src/map.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/map.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /ssd1_lin/Thesis/intro-to-visual-odometry/src/map.cc > CMakeFiles/main.dir/src/map.cc.i
+
+CMakeFiles/main.dir/src/map.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/map.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /ssd1_lin/Thesis/intro-to-visual-odometry/src/map.cc -o CMakeFiles/main.dir/src/map.cc.s
+
+CMakeFiles/main.dir/src/mappoint.cc.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/mappoint.cc.o: ../src/mappoint.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/src/mappoint.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/mappoint.cc.o -c /ssd1_lin/Thesis/intro-to-visual-odometry/src/mappoint.cc
+
+CMakeFiles/main.dir/src/mappoint.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/mappoint.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /ssd1_lin/Thesis/intro-to-visual-odometry/src/mappoint.cc > CMakeFiles/main.dir/src/mappoint.cc.i
+
+CMakeFiles/main.dir/src/mappoint.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/mappoint.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /ssd1_lin/Thesis/intro-to-visual-odometry/src/mappoint.cc -o CMakeFiles/main.dir/src/mappoint.cc.s
+
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/src/main.cc.o" \
-"CMakeFiles/main.dir/src/frame.cc.o"
+"CMakeFiles/main.dir/src/frame.cc.o" \
+"CMakeFiles/main.dir/src/camera.cc.o" \
+"CMakeFiles/main.dir/src/frontend.cc.o" \
+"CMakeFiles/main.dir/src/map.cc.o" \
+"CMakeFiles/main.dir/src/mappoint.cc.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
 ../bin/main: CMakeFiles/main.dir/src/main.cc.o
 ../bin/main: CMakeFiles/main.dir/src/frame.cc.o
+../bin/main: CMakeFiles/main.dir/src/camera.cc.o
+../bin/main: CMakeFiles/main.dir/src/frontend.cc.o
+../bin/main: CMakeFiles/main.dir/src/map.cc.o
+../bin/main: CMakeFiles/main.dir/src/mappoint.cc.o
 ../bin/main: CMakeFiles/main.dir/build.make
 ../bin/main: /usr/local/lib/libopencv_gapi.so.4.5.5
 ../bin/main: /usr/local/lib/libopencv_stitching.so.4.5.5
@@ -182,7 +242,7 @@ main_EXTERNAL_OBJECTS =
 ../bin/main: /usr/local/lib/libpango_packetstream.so
 ../bin/main: /usr/local/lib/libpango_core.so
 ../bin/main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../bin/main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable ../bin/main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

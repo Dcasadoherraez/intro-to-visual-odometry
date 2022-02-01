@@ -4,8 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/ssd1_lin/Thesis/intro-to-visual-odometry/src/camera.cc" "/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/main.dir/src/camera.cc.o"
   "/ssd1_lin/Thesis/intro-to-visual-odometry/src/frame.cc" "/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/main.dir/src/frame.cc.o"
+  "/ssd1_lin/Thesis/intro-to-visual-odometry/src/frontend.cc" "/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/main.dir/src/frontend.cc.o"
   "/ssd1_lin/Thesis/intro-to-visual-odometry/src/main.cc" "/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/main.dir/src/main.cc.o"
+  "/ssd1_lin/Thesis/intro-to-visual-odometry/src/map.cc" "/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/main.dir/src/map.cc.o"
+  "/ssd1_lin/Thesis/intro-to-visual-odometry/src/mappoint.cc" "/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/main.dir/src/mappoint.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -134,6 +134,33 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/camera.o: src/camera.cc.o
+
+.PHONY : src/camera.o
+
+# target to build an object file
+src/camera.cc.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera.cc.o
+.PHONY : src/camera.cc.o
+
+src/camera.i: src/camera.cc.i
+
+.PHONY : src/camera.i
+
+# target to preprocess a source file
+src/camera.cc.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera.cc.i
+.PHONY : src/camera.cc.i
+
+src/camera.s: src/camera.cc.s
+
+.PHONY : src/camera.s
+
+# target to generate assembly for a file
+src/camera.cc.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera.cc.s
+.PHONY : src/camera.cc.s
+
 src/frame.o: src/frame.cc.o
 
 .PHONY : src/frame.o
@@ -160,6 +187,33 @@ src/frame.s: src/frame.cc.s
 src/frame.cc.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/frame.cc.s
 .PHONY : src/frame.cc.s
+
+src/frontend.o: src/frontend.cc.o
+
+.PHONY : src/frontend.o
+
+# target to build an object file
+src/frontend.cc.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/frontend.cc.o
+.PHONY : src/frontend.cc.o
+
+src/frontend.i: src/frontend.cc.i
+
+.PHONY : src/frontend.i
+
+# target to preprocess a source file
+src/frontend.cc.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/frontend.cc.i
+.PHONY : src/frontend.cc.i
+
+src/frontend.s: src/frontend.cc.s
+
+.PHONY : src/frontend.s
+
+# target to generate assembly for a file
+src/frontend.cc.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/frontend.cc.s
+.PHONY : src/frontend.cc.s
 
 src/main.o: src/main.cc.o
 
@@ -188,6 +242,60 @@ src/main.cc.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.cc.s
 .PHONY : src/main.cc.s
 
+src/map.o: src/map.cc.o
+
+.PHONY : src/map.o
+
+# target to build an object file
+src/map.cc.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/map.cc.o
+.PHONY : src/map.cc.o
+
+src/map.i: src/map.cc.i
+
+.PHONY : src/map.i
+
+# target to preprocess a source file
+src/map.cc.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/map.cc.i
+.PHONY : src/map.cc.i
+
+src/map.s: src/map.cc.s
+
+.PHONY : src/map.s
+
+# target to generate assembly for a file
+src/map.cc.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/map.cc.s
+.PHONY : src/map.cc.s
+
+src/mappoint.o: src/mappoint.cc.o
+
+.PHONY : src/mappoint.o
+
+# target to build an object file
+src/mappoint.cc.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/mappoint.cc.o
+.PHONY : src/mappoint.cc.o
+
+src/mappoint.i: src/mappoint.cc.i
+
+.PHONY : src/mappoint.i
+
+# target to preprocess a source file
+src/mappoint.cc.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/mappoint.cc.i
+.PHONY : src/mappoint.cc.i
+
+src/mappoint.s: src/mappoint.cc.s
+
+.PHONY : src/mappoint.s
+
+# target to generate assembly for a file
+src/mappoint.cc.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/mappoint.cc.s
+.PHONY : src/mappoint.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -198,12 +306,24 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... main"
+	@echo "... src/camera.o"
+	@echo "... src/camera.i"
+	@echo "... src/camera.s"
 	@echo "... src/frame.o"
 	@echo "... src/frame.i"
 	@echo "... src/frame.s"
+	@echo "... src/frontend.o"
+	@echo "... src/frontend.i"
+	@echo "... src/frontend.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/map.o"
+	@echo "... src/map.i"
+	@echo "... src/map.s"
+	@echo "... src/mappoint.o"
+	@echo "... src/mappoint.i"
+	@echo "... src/mappoint.s"
 .PHONY : help
 
 
