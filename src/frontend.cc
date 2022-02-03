@@ -24,7 +24,7 @@ void Frontend::ProjectFeatures(vector<KeyPoint> features_left, vector<KeyPoint> 
         return;
     }
 
-    for (int i = 0; i < matches.size(); i++) {
+    for (size_t i = 0; i < matches.size(); i++) {
         KeyPoint feat_right = features_right[matches[i].queryIdx];
         KeyPoint feat_left = features_left[matches[i].trainIdx];
 
