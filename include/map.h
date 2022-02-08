@@ -4,6 +4,7 @@
 #define MAP_H
 
 #include "common_include.h"
+
 #include "mappoint.h"
 #include "frame.h"
 
@@ -23,7 +24,7 @@ public:
 
     static Map::Ptr InitMap();
 
-
+    vector<MapPoint::Ptr> GetAllMapPoints();
 };
 
 #endif

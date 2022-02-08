@@ -19,6 +19,8 @@ public:
 
     static MapPoint::Ptr CreateNewMappoint();
 
+    Vec3 GetWorldPos();
+
 };  
 
 #endif

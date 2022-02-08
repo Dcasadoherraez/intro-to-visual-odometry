@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
 )
+catkin_package()
 
 # Eigen
 find_package(Eigen3 REQUIRED)
@@ -44,6 +45,7 @@ find_package(pybind11 REQUIRED)
 find_package(fmt REQUIRED)
 
 set(INCLUDE_DIRS
+    ${catkin_INCLUDE_DIRS}
     "/usr/include/eigen3"
     ${OpenCV_INCLUDE_DIRS}
     ${Sophus_INCLUDE_DIRS}
@@ -82,11 +84,8 @@ add_executable(${PROJECT_NAME}_node
     src/frontend.cc
     src/map.cc
     src/mappoint.cc
+    src/mappublisher.cc
 )
 
 target_link_libraries(${PROJECT_NAME}_node 
 ${THIRD_PARTY_LIBS})
-
-
-set_target_properties(${PROJECT_NAME}_node
-  PROPERTIES EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

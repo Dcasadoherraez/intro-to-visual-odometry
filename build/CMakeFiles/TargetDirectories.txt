@@ -1,4 +1,0 @@
-/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/rebuild_cache.dir
-/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/edit_cache.dir
-/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/test.dir
-/ssd1_lin/Thesis/intro-to-visual-odometry/build/CMakeFiles/main.dir

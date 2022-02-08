@@ -27,6 +27,7 @@
 // typedefs for eigen
 // double matricies
 typedef Eigen::Matrix<double, 3, 3> Mat33;
+typedef Eigen::Matrix<double, 4, 4> Mat44;
 
 
 // float matricies
@@ -51,7 +52,14 @@ typedef Eigen::Matrix<float, 2, 1> Vec2f;
 #include <opencv4/opencv2/core.hpp>
 #include <opencv4/opencv2/features2d.hpp>
 #include "opencv4/opencv2/highgui.hpp"
+#include <opencv2/core/eigen.hpp>
+
 // glog
 // #include <glog/logging.h>
+
+// ROS
+#include <ros/ros.h>
+#include <visualization_msgs/Marker.h>
+
 
 #endif  // MYSLAM_COMMON_INCLUDE_H

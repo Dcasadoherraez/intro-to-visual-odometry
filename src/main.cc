@@ -1,7 +1,10 @@
-#include "common_include.h"
 #include "frame.h"
-#include "map.h"
 #include "frontend.h"
+#include "map.h"
+#include "mappublisher.h"
+#include "mappoint.h"
+
+#include "common_include.h"
 
 using namespace std;
 
@@ -12,15 +15,15 @@ string getKITTIName(int img_num) {
     return name + ".png";
 }
 
-vector<Camera> loadKITTI(string filename) {
-    vector<Camera> cameras;
+vector<Camera::Ptr> loadKITTI(string filename) {
+    vector<Camera::Ptr> cameras;
     ifstream fin(filename );
     if (!fin) {
         cout << "[ERROR] cannot find " << filename << "/calib.txt!" << endl;
         return {};
     }
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 2; ++i) {
         char camera_name[3];
         for (int k = 0; k < 3; ++k) {
             fin >> camera_name[k];
@@ -38,17 +41,24 @@ vector<Camera> loadKITTI(string filename) {
         t = K.inverse() * t;
         K = K * 0.5;
         Sophus::SE3d pose_init = Sophus::SE3d(Sophus::SO3d(), t);
-        Camera new_camera(K(0, 0), K(1, 1), K(0, 2), K(1, 2),
-                          t.norm(), pose_init);
+        Camera::Ptr new_camera(new Camera(K(0, 0), K(1, 1), K(0, 2), K(1, 2),
+                          -t.norm(), pose_init));
+        // if rectified 
         cameras.push_back(new_camera);
         cout << "[INFO] Camera " << i << " extrinsics: " << t.transpose() << endl;
+        cout << "[INFO] Camera " << i << " intrinsics: \n" << K.matrix() << endl;
+
     }
     fin.close();
 
     return cameras;
 }
 
-int main() {
+
+int main(int argc, char** argv)
+{
+    ros::init (argc, argv, "pub_pcl");
+
     string DATASET_PATH = "/ssd1_lin/Thesis/ORB-SLAM/datasets/KITTI/dataset/sequences/00/";
     string DATASET_SUFFIX = "image_0/";
     string CAM0 = "image_0/";
@@ -68,13 +78,14 @@ int main() {
     cout << TIMESTAMPS_PATH << endl;
     if (!timestamps_file.is_open()) cout << "Error opening timestamps file: " + TIMESTAMPS_PATH;
 
-    vector<Camera> cameras = loadKITTI(DATASET_PATH + "calib.txt");
+    vector<Camera::Ptr> cameras = loadKITTI(DATASET_PATH + "calib.txt");
 
     int img_ct = 0;
     bool initialized = false;
 
-    Map::Ptr map(new Map());
+    Map::Ptr map(new Map(0));
     Frontend::Ptr frontend(new Frontend(cameras[0], cameras[1]));
+    MapPublisher::Ptr mapPub(new MapPublisher(map));
 
     while (!curr_img0.empty()) {
         // read image file
@@ -82,18 +93,17 @@ int main() {
         string cam0_img_path = DATASET_PATH + CAM0 + img_name;
         string cam1_img_path = DATASET_PATH + CAM1 + img_name;
 
-        curr_img0 = cv::imread(cam0_img_path);
-        curr_img1 = cv::imread(cam1_img_path);
+        curr_img0 = cv::imread(cam0_img_path, IMREAD_GRAYSCALE);
+        curr_img1 = cv::imread(cam1_img_path, IMREAD_GRAYSCALE);
 
         // read timestamp
         string timestamp;
         getline(timestamps_file, timestamp);
-
         // create frame class instance
         Frame::Ptr new_frame(new Frame(img_ct, curr_img0, curr_img1, stod(timestamp)));
         new_frame->GetFeatures();
         vector<DMatch> matches = new_frame->MatchFeatures();
-        new_frame->DisplayMatches();
+        // new_frame->DisplayMatches();
 
         // initialize map 
         if (!initialized) {
@@ -101,12 +111,24 @@ int main() {
             map->InitMap();
             frontend->_map = map;
             frontend->_current_frame = new_frame;
+            frontend->ShowDepthMap();
             frontend->ProjectFeatures(new_frame->_features_left, new_frame->_features_right, matches);
         }
+        
+        // publish map
+        Vec3 t(0,0,0);
+        Mat33 R;
+        R << 1, 0, 0,
+             0, 1, 0,
+             0, 0, 1;
+        Sophus::SE3d currentCamPose(R, t);
+
+        mapPub->SetCurrentCameraPose(currentCamPose);
+        mapPub->Refresh();
 
         img_ct++;
         //break;
-        if (img_ct >=5 ) break;
+        // if (img_ct >=5 ) break;
     }
     
     return 1;

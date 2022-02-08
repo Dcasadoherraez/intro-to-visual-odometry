@@ -38,9 +38,10 @@ vector<DMatch> Frame::MatchFeatures() {
     auto min_max = minmax_element(matches.begin(), matches.end(),
                                 [](const DMatch &m1, const DMatch &m2) { return m1.distance < m2.distance; });
     double min_dist = min_max.first->distance;
-  
+    cout << "Min distance: " << min_dist << endl;
+
     vector<DMatch> good_matches;
-    for (int i = 0; i < _descriptors_left.rows; i++) {
+    for (int i = 0; i < matches.size(); i++) {
         if (matches[i].distance <= max(2 * min_dist, 30.0)) 
             good_matches.push_back(matches[i]);
     }

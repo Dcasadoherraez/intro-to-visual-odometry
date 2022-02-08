@@ -12,6 +12,7 @@ using namespace cv;
 class Camera {
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
+    typedef shared_ptr<Camera> Ptr;
 
     // intrinsics
     double _fx = 0, _fy = 0, _cx = 0, _cy = 0, _baseline = 0;

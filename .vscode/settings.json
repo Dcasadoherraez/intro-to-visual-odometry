@@ -52,6 +52,13 @@
         "typeinfo": "cpp",
         "bit": "cpp",
         "deque": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "*.ipp": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp",
+        "map": "cpp",
+        "set": "cpp"
     }
 }

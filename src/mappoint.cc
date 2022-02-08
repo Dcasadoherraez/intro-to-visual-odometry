@@ -10,3 +10,9 @@ MapPoint::Ptr MapPoint::CreateNewMappoint() {
     new_mappoint->_id = factory_id++;
     return new_mappoint;
 }
+
+Vec3 MapPoint::GetWorldPos()
+{
+    // boost::mutex::scoped_lock lock(mMutexPos);
+    return _pos3d;
+}

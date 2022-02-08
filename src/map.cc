@@ -16,3 +16,13 @@ Map::Ptr Map::InitMap() {
     cout << "Map initialized with id " << factory_id << endl;
     return new_map;
 }
+
+vector<MapPoint::Ptr> Map::GetAllMapPoints()
+{
+    //boost::mutex::scoped_lock lock(mMutexMap);
+    vector<MapPoint::Ptr> allMPs = {};
+    for (pair<unsigned long, MapPoint::Ptr> i : _MapPoints) {
+        allMPs.push_back(i.second);
+    }
+    return allMPs;
+}
