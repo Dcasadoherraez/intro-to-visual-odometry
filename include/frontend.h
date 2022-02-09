@@ -25,16 +25,16 @@ public:
 
     void InitMap();
 
-    void ProjectFeatures(vector<KeyPoint> features_left, vector<KeyPoint> features_right, vector<DMatch> matches);
+    void ProjectFeatures(vector<KeyPoint> &features_left, vector<KeyPoint> &features_right, vector<DMatch> &matches);
 
     double GetDepth(double x_l, double x_r);
 
-    void GetDisparityMap();
+    Mat GetDisparityMap();
 
-    void GetDepthMap(Mat disparityMap);
+    Mat GetDepthMap(Mat disparityMap);
 
 private:
-    void DisplayDepthMap(Mat &input);
+    void DisplayMap(Mat &input);
 };
 
 #endif

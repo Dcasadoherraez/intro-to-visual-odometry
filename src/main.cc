@@ -39,7 +39,6 @@ vector<Camera::Ptr> loadKITTI(string filename) {
         Vec3 t;
         t << projection_data[3], projection_data[7], projection_data[11];
         t = K.inverse() * t;
-        K = K * 0.5;
         Sophus::SE3d pose_init = Sophus::SE3d(Sophus::SO3d(), t);
         Camera::Ptr new_camera(new Camera(K(0, 0), K(1, 1), K(0, 2), K(1, 2),
                           t.norm(), pose_init));
@@ -99,6 +98,7 @@ int main(int argc, char** argv)
         // read timestamp
         string timestamp;
         getline(timestamps_file, timestamp);
+        
         // create frame class instance
         Frame::Ptr new_frame(new Frame(img_ct, curr_img0, curr_img1, stod(timestamp)));
         new_frame->GetFeatures();
@@ -111,10 +111,8 @@ int main(int argc, char** argv)
             map->InitMap();
             frontend->_map = map;
             frontend->_current_frame = new_frame;
-            frontend->GetDisparityMap();
-            // frontend->ProjectFeatures(new_frame->_features_left, new_frame->_features_right, matches);
+            frontend->ProjectFeatures(new_frame->_features_left, new_frame->_features_right, matches);
         }
-        
         // publish map
         Vec3 t(0,0,0);
         Mat33 R;
@@ -123,8 +121,9 @@ int main(int argc, char** argv)
              0, 0, 1;
         Sophus::SE3d currentCamPose(R, t);
 
-        mapPub->SetCurrentCameraPose(currentCamPose);
-        mapPub->Refresh();
+        // TODO error here
+        // mapPub->SetCurrentCameraPose(currentCamPose);
+        // mapPub->Refresh();
 
         img_ct++;
         //break;

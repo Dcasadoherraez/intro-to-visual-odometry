@@ -16,30 +16,28 @@ Frontend::Frontend(Camera::Ptr cam_left, Camera::Ptr cam_right) {
 }
 
 double Frontend::GetDepth(double x_l, double x_r) {
-    double d = (abs(_cam[1]->_baseline) * (_cam[0]->_fx + _cam[1]->_fy) / 2 ) / (x_l - x_r);
+    double d = (abs(_cam[1]->_baseline) * _cam[1]->_fy)/ (x_l - x_r);
     if (d && d > 0)
         return d;
     return 0;
 }
 
-void Frontend::ProjectFeatures(vector<KeyPoint> features_left, vector<KeyPoint> features_right, vector<DMatch> matches) {
+void Frontend::ProjectFeatures(vector<KeyPoint> &features_left, vector<KeyPoint> &features_right, vector<DMatch> &matches) {
     
     if (matches.empty()) {
         cout << "No matches found!" << endl;
         return;
     }
 
+    Mat disparityMap = GetDisparityMap();
+    Mat depthMap = GetDepthMap(disparityMap);
+
     for (int i = 0; i < matches.size(); i++) {
+        KeyPoint feat_left = features_left[matches[i].queryIdx];
+        KeyPoint feat_right = features_right[matches[i].trainIdx];
 
-        KeyPoint feat_right = features_right[matches[i].queryIdx];
-        KeyPoint feat_left = features_left[matches[i].trainIdx];
-
-        double x_l = _current_frame->_img_left.at<double>(feat_left.pt.x, feat_left.pt.y);
-        double x_r = _current_frame->_img_right.at<double>(feat_right.pt.x, feat_right.pt.y);
-        
-        cout << "Point at left: " << feat_left.pt.x << ", " << feat_left.pt.y << " -> " << x_l << endl;
-        cout << "Point at right: " << feat_right.pt.x << ", " << feat_right.pt.y << " -> " << x_r << endl;
-
+        double x_l = feat_left.pt.x;
+        double x_r = feat_right.pt.y;
         double depth = GetDepth(x_l, x_r);
 
         MapPoint::Ptr new_mappoint = MapPoint::CreateNewMappoint();
@@ -50,10 +48,9 @@ void Frontend::ProjectFeatures(vector<KeyPoint> features_left, vector<KeyPoint> 
         new_mappoint->_pos3d = _cam[0]->px2cam(px, depth);
     }
 
-    return; 
 }
 
-void Frontend::GetDisparityMap() {
+Mat Frontend::GetDisparityMap() {
     Mat cameraMatrix1, cameraMatrix2;
     eigen2cv(_cam[0]->K(), cameraMatrix1);
     eigen2cv(_cam[1]->K(), cameraMatrix2);
@@ -86,32 +83,28 @@ void Frontend::GetDisparityMap() {
     dispMap = dispMap / 16;
     dispMap.setTo(0.1, dispMap == 0.0);
     dispMap.setTo(0.1, dispMap == -1);
-    DisplayDepthMap(dispMap);
+    // DisplayMap(dispMap);
 
-    double min, max;
-    minMaxLoc(dispMap, &min, &max);
-    cout << "Baseline: " << _cam[1]->_baseline << endl;
-    cout << "Min disparity: " << min << " Max disparity: " << max << endl;
+    return dispMap;
 
-    GetDepthMap(dispMap);
 }
 
-void Frontend::GetDepthMap(Mat disparityMap) {
-    double min, max;
+Mat Frontend::GetDepthMap(Mat disparityMap) {
     Mat depthMap;
-
     depthMap = (abs(_cam[1]->_baseline) * _cam[1]->_fx) / disparityMap;
-    minMaxLoc(depthMap, &min, &max);
-    cout << "Min depth: " << min << " Max depth: " << max << endl;
-    DisplayDepthMap(depthMap);
-      
+    // DisplayMap(depthMap);
+
+    return depthMap;
 }
 
-void Frontend::DisplayDepthMap(Mat &input) {
-    double min, max;
-    minMaxIdx(input, &min, &max);
+void Frontend::DisplayMap(Mat &input) {
+    double minVal, maxVal, minIdx, maxIdx;
+    minMaxIdx(input, &minVal, &maxVal);
+    minMaxLoc(input, &minIdx, &maxIdx);
+    cout << "Min: " << minVal << " Max: " << maxVal << endl;
+
     Mat displayMap;
-    convertScaleAbs(input, displayMap, 255 / max);
+    convertScaleAbs(input, displayMap, 255 / maxVal);
 
     imshow("Depth map", displayMap);
     waitKey(0);   
