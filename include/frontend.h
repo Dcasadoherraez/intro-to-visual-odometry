@@ -29,8 +29,12 @@ public:
 
     double GetDepth(double x_l, double x_r);
 
-    void ShowDepthMap();
+    void GetDisparityMap();
 
+    void GetDepthMap(Mat disparityMap);
+
+private:
+    void DisplayDepthMap(Mat &input);
 };
 
 #endif

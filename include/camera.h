@@ -16,6 +16,8 @@ public:
 
     // intrinsics
     double _fx = 0, _fy = 0, _cx = 0, _cy = 0, _baseline = 0;
+
+    // extrinsics
     Sophus::SE3d _pose;
 
     // camera constructors

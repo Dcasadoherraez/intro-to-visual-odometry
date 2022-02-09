@@ -59,6 +59,11 @@
         "list": "cpp",
         "unordered_set": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "strstream": "cpp",
+        "bitset": "cpp",
+        "iomanip": "cpp",
+        "typeindex": "cpp",
+        "variant": "cpp"
     }
 }

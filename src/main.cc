@@ -42,7 +42,7 @@ vector<Camera::Ptr> loadKITTI(string filename) {
         K = K * 0.5;
         Sophus::SE3d pose_init = Sophus::SE3d(Sophus::SO3d(), t);
         Camera::Ptr new_camera(new Camera(K(0, 0), K(1, 1), K(0, 2), K(1, 2),
-                          -t.norm(), pose_init));
+                          t.norm(), pose_init));
         // if rectified 
         cameras.push_back(new_camera);
         cout << "[INFO] Camera " << i << " extrinsics: " << t.transpose() << endl;
@@ -111,8 +111,8 @@ int main(int argc, char** argv)
             map->InitMap();
             frontend->_map = map;
             frontend->_current_frame = new_frame;
-            frontend->ShowDepthMap();
-            frontend->ProjectFeatures(new_frame->_features_left, new_frame->_features_right, matches);
+            frontend->GetDisparityMap();
+            // frontend->ProjectFeatures(new_frame->_features_left, new_frame->_features_right, matches);
         }
         
         // publish map

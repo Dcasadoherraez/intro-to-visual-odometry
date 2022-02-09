@@ -39,8 +39,6 @@ public:
 
     // display matches between frames
     void DisplayMatches();
-
-
 };
 
 #endif
