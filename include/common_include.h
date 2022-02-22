@@ -20,6 +20,8 @@
 #include <unordered_map>
 #include <fstream>
 
+#include <signal.h>
+
 // define the commonly included file to avoid a long include list
 #include <Eigen/Core>
 #include <Eigen/Geometry>
@@ -63,6 +65,8 @@ typedef Eigen::Matrix<float, 2, 1> Vec2f;
 // ROS
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
-
+#include <tf2/LinearMath/Transform.h>
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/TransformStamped.h>
 
 #endif  // MYSLAM_COMMON_INCLUDE_H

@@ -5,7 +5,7 @@
 
 MapPublisher::MapPublisher(Map::Ptr pMap) : mpMap(pMap), mbCameraUpdated(false)
 {
-    const char* MAP_FRAME_ID = "/ORB_SLAM/World";
+    const char* MAP_FRAME_ID = "ORB_SLAM/World";
     const char* POINTS_NAMESPACE = "MapPoints";
     // const char* GRAPH_NAMESPACE = "Graph";
     const char* CAMERA_NAMESPACE = "Camera";
@@ -30,14 +30,16 @@ MapPublisher::MapPublisher(Map::Ptr pMap) : mpMap(pMap), mbCameraUpdated(false)
     mCurrentCamera.scale.x=0.01;//0.2; 0.03
     mCurrentCamera.pose.orientation.w=1.0;
     mCurrentCamera.action=visualization_msgs::Marker::ADD;
-    mCurrentCamera.color.g=1.0f;
+    mCurrentCamera.color.g = 1.0f;
     mCurrentCamera.color.a = 1.0;
 
+    fCameraSize = 0.04;
+    fPointSize = 0.01;
+
     //Configure Publisher
-    publisher = nh.advertise<visualization_msgs::Marker>("ORB_SLAM/Map", 10);
+    publisher = nh.advertise<visualization_msgs::Marker>("ORB_SLAM/World", 100);
 
     publisher.publish(mPoints);
-    publisher.publish(mCovisibilityGraph);
     publisher.publish(mCurrentCamera);
 }
 
@@ -49,9 +51,9 @@ void MapPublisher::Refresh()
        PublishCurrentCamera(Tcw);
        ResetCamFlag();
     }
-    vector<MapPoint::Ptr> vMapPoints = mpMap->GetAllMapPoints();
+    // vector<MapPoint::Ptr> vMapPoints = mpMap->GetAllMapPoints();
 
-    PublishMapPoints(vMapPoints);   
+    // PublishMapPoints(vMapPoints);   
 
 }
 
@@ -76,10 +78,11 @@ void MapPublisher::PublishMapPoints(const vector<MapPoint::Ptr> &vpMPs)
     publisher.publish(mPoints);
 }
 
-cv::Mat MapPublisher::SE3dtoMat(Sophus::SE3d Tcw) {
-     cv::Mat Tcw_conv;
-     cv::eigen2cv(Tcw.matrix(), Tcw_conv);
-     return Tcw_conv;
+cv::Mat MapPublisher::SE3dtoMat(const Sophus::SE3d &Tcw) {
+    cv::Mat Tcw_conv;
+    cv::eigen2cv(Tcw.matrix(), Tcw_conv);
+    Tcw_conv.convertTo(Tcw_conv, CV_32F);
+    return Tcw_conv;
 }
 
 void MapPublisher::PublishCurrentCamera(const Sophus::SE3d &Tcw_sophus)
@@ -102,6 +105,16 @@ void MapPublisher::PublishCurrentCamera(const Sophus::SE3d &Tcw_sophus)
     cv::Mat p2w = Twc*p2;
     cv::Mat p3w = Twc*p3;
     cv::Mat p4w = Twc*p4;
+
+
+    // cout << "T: \n" << Tcw_sophus.matrix() << endl;
+    // cout << "Twc: \n" << Twc << endl;
+
+    // cout << "P1w: \n" << p1 << endl;
+    // cout << "P2w: \n" << p2 << endl;
+    // cout << "P3w: \n" << p3 << endl;
+    // cout << "P4w: \n" << p4 << endl;
+
 
     geometry_msgs::Point msgs_o,msgs_p1, msgs_p2, msgs_p3, msgs_p4;
     msgs_o.x=ow.at<float>(0);
@@ -140,6 +153,7 @@ void MapPublisher::PublishCurrentCamera(const Sophus::SE3d &Tcw_sophus)
     mCurrentCamera.header.stamp = ros::Time::now();
 
     publisher.publish(mCurrentCamera);
+
 }
 
 void MapPublisher::SetCurrentCameraPose(const Sophus::SE3d &Tcw)

@@ -23,7 +23,7 @@ public:
     void PublishMapPoints(const std::vector<MapPoint::Ptr> &vpMPs);
     void PublishCurrentCamera(const Sophus::SE3d &Tcw);
     void SetCurrentCameraPose(const Sophus::SE3d &Tcw);
-    cv::Mat SE3dtoMat(Sophus::SE3d Tcw);
+    cv::Mat SE3dtoMat(const Sophus::SE3d &Tcw);
 
 private:
 
@@ -35,8 +35,6 @@ private:
     ros::Publisher publisher;
 
     visualization_msgs::Marker mPoints;
-    visualization_msgs::Marker mCovisibilityGraph;
-    visualization_msgs::Marker mMST;
     visualization_msgs::Marker mCurrentCamera;
 
     float fCameraSize;

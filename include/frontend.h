@@ -19,6 +19,8 @@ public:
     Frame::Ptr _current_frame;
     Map::Ptr _map;
 
+    tf2_ros::TransformBroadcaster tfBr;
+
     Frontend() {}
 
     Frontend(Camera::Ptr cam_left, Camera::Ptr cam_right);
